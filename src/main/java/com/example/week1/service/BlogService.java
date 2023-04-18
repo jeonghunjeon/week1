@@ -5,6 +5,7 @@ import com.example.week1.dto.BlogResponseDto;
 import com.example.week1.entity.Blog;
 import com.example.week1.entity.Timestamped;
 import com.example.week1.repository.BlogRepository;
+import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +24,11 @@ public class BlogService {
         this.blogRepository = blogRepository;
     }
 
-    public String createBlog(BlogRequestDto requestDto) {
+    public BlogResponseDto createBlog(BlogRequestDto requestDto) {
         // 브라우저에서 받아온 데이터를 저장하기 위해서 Course 객체로 변환
         Blog blog = new Blog(requestDto);
         blogRepository.save(blog);
-        return "게시글 저장에 성공했습니다.";
+        return new BlogResponseDto(blog);
     }
 
     public List<BlogResponseDto> getBlogList() {

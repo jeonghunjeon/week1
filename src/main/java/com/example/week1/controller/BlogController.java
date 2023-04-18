@@ -20,7 +20,7 @@ public class BlogController {
     }
 
     @PostMapping("/create")
-    public String createBlog(@RequestBody BlogRequestDto requestDto) {
+    public BlogResponseDto createBlog(@RequestBody BlogRequestDto requestDto) {
         return blogService.createBlog(requestDto);
     }
 
